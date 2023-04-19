@@ -6,9 +6,9 @@ setup(
     description='Load JSON files and use the data with dot notation then dump to the file',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/mi_usuario/mi_libreria',
-    author='Mi Nombre',
-    author_email='mi_correo@ejemplo.com',
+    url='https://github.com/Mits-Soft/JsonDot.git',
+    author='Marco Antonio Calviño Coira',
+    author_email='mits.soft.main@gmail.com',
     license='MIT',
     packages=['jsondot'],
     classifiers=[
