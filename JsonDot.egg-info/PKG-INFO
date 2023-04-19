@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: JsonDot
+Version: 0.1
+Summary: Load JSON files and use the data with dot notation then dump to the file
+Home-page: https://github.com/mi_usuario/mi_libreria
+Author: Mi Nombre
+Author-email: mi_correo@ejemplo.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# JsonDot
+Python library for loading JSON files and use them with dot notation then dump to the file again
