@@ -1,5 +1,4 @@
-from jsondot import JsonDot
-
+from jsondot.jsondot import JsonDot
 
 class JsonDotExample():
 
@@ -26,14 +25,16 @@ class JsonDotExample():
         print("Loaded json")
         print(self.json.dumps())
         
-        s = self.json.dumps()
+        # s = self.json.dumps()
         
-        self.j = JsonDot().loads(s)
+        # self.j = JsonDot().loads(s)
         
-        self.j.dump('.\examples\example.json')
+        # self.j.dump('.\examples\example.json')
              
         s = self.json.dumps()
         print("Dumped string: \n" + s)
+        
+        self.json.dump('.\examples\example.json')
         
         
         pass
