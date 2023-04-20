@@ -11,6 +11,20 @@ class Dot(object):
 
     def __str__(self) -> str:
         return self.__dict__.__str__()
+    
+    def process_list_for_bumps(self, l: list):
+        blist = []
+        e = None
+        d = None
+        for elem in l:            
+            if isinstance(elem, Dot):
+                e = elem
+                d = elem.dumps()               
+            if isinstance(elem, list):
+                e = elem
+                d = self.process_list_for_bumps(e)
+            blist.append(d)
+        return blist
 
     def dumps(self):
         items = self.__dict__.items()
@@ -27,6 +41,9 @@ class Dot(object):
                     if isinstance(elem, Dot):
                         d = elem.dumps()
                         blist.append(d)
+                    if isinstance(elem, list):
+                        clist = self.process_list_for_bumps(elem)
+                        blist.append(clist)
                 d1[k] = blist                       
             elif k != 'translation' and k != 'file_path':
                 k = self.translation[k]
