@@ -9,9 +9,6 @@ class Dot(object):
         self.file_path = file_path
         pass
 
-    # def __getitem__(self, key):
-    #     return getattr(self, key)
-
     def __str__(self) -> str:
         return self.__dict__.__str__()
 
