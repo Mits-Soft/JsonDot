@@ -1,4 +1,5 @@
 import json
+from typing import Union
 
 
 class Dot(object):
@@ -23,6 +24,13 @@ class Dot(object):
                 # v = v.translate(v.__dict__.items(), v.translation)
                 v = v.dumps()
                 d1[k] = v
+            elif isinstance(v, list):
+                blist = list()
+                for i, elem in enumerate(v):
+                    if isinstance(elem, Dot):
+                        d = elem.dumps()
+                        blist.append(d)
+                d1[k] = blist                       
             elif k != 'translation' and k != 'file_path':
                 k = self.translation[k]
                 d1[k] = v
@@ -120,11 +128,20 @@ class JsonDot(Dot):
         with open(file_path, "w") as file:
             file.write(self.dumps())
 
-    def __load_data(self, data: dict, dot: Dot):
+    def __load_data(self, data: dict, dot: Union[Dot, list]):
         for k, v in data.items():
             if isinstance(v, dict):
                 bdot = Dot(self.file_path)
                 dot.add_field(k, self.__load_data(v, bdot))
+            elif isinstance(v, list):
+                bdot = Dot(self.file_path)
+                blist = list()
+                for i, elem in enumerate(v):
+                    if isinstance(elem, dict):
+                        blist.append(self.__load_data(elem, bdot))
+                    elif isinstance(elem, list):
+                        blist.append(self.__load_data(elem, bdot))
+                dot.add_field(k, blist)       
             else:
                 dot.add_field(k, v)
         return dot
