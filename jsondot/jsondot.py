@@ -143,18 +143,19 @@ class JsonDot(Dot):
         with open(file_path, "w") as file:
             file.write(self.dumps())
             
-    def process_list_for_load(self, list: list):
+    def process_list_for_load(self, l: list):
         blist = []
         e = None
         d = None
-        for elem in list:            
+        for elem in l:            
             if isinstance(elem, dict):
                 e = elem
                 bdot = Dot(self.file_path)
                 d = self.__load_data(e, bdot)
                 
             elif isinstance(elem, list):
-                blist.append(self.__load_data(elem, self.file_path))
+                e = elem
+                d = self.process_list_for_load(e)
             blist.append(d)
         return blist
 
