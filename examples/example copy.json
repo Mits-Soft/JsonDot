@@ -1,20 +1,20 @@
 {
-    "nombre": "Juan",
-    "apellido": "Pérez",
-    "edad": 30,
-    "dirección": {
-        "calle": "Calle Falsa",
-        "número": 123,
-        "ciudad": "Ciudad Ficticia"
+    "Nombre": "Juan",
+    "Apellido": "Pérez",
+    "Edad": 30,
+    "Dirección": {
+        "Calle": "Calle Falsa",
+        "Número": 123,
+        "Ciudad": "Ciudad Ficticia"
     },
-    "gustos": [
+    "Gustos": [
         {
-            "tipo": "música",
-            "nombre": "rock"
+            "Tipo": "música",
+            "Nombre": "rock"
         },
         {
-            "tipo": "deporte",
-            "nombre": "fútbol"
+            "Tipo": "deporte",
+            "Nombre": "fútbol"
         }
     ]
  }

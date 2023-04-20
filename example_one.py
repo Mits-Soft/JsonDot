@@ -5,6 +5,8 @@ class JsonDotExample():
     def __init__(self) -> None:
         self.json = JsonDot().load('.\examples\example.json')
         
+        
+        
         print("Loaded json")
         print(self.json.dumps())
         
@@ -17,6 +19,7 @@ class JsonDotExample():
         self.json.nombre = "Pinocho"
         self.json.apellido = "Geppetto"
         self.json.edad = 6
+        self.json.gustos[1].nombre = "F1"
         
         print("Nombre: " + self.json.nombre)        
         print("Apellido: " + self.json.apellido)        
@@ -24,12 +27,6 @@ class JsonDotExample():
         
         print("Loaded json")
         print(self.json.dumps())
-        
-        # s = self.json.dumps()
-        
-        # self.j = JsonDot().loads(s)
-        
-        # self.j.dump('.\examples\example.json')
              
         s = self.json.dumps()
         print("Dumped string: \n" + s)
