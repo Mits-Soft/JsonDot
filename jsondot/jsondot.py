@@ -36,7 +36,6 @@ class Dot(object):
         d1 = {}
         for k, v in items:
             if isinstance(v, Dot):
-                # v = v.translate(v.__dict__.items(), v.translation)
                 v = v.__dumps()
                 d1[k] = v
             elif isinstance(v, list):
@@ -52,7 +51,6 @@ class Dot(object):
             elif k != 'translation' and k != 'file_path':
                 k = self.translation[k]
                 d1[k] = v
-                # s += d1.__str__()
         s = d1.__str__()
         return s
         pass
@@ -123,11 +121,7 @@ class JsonDot(Dot):
         self.file_path = ""
         self.data = None
         self.dot = None
-        # self.dot = Dot()
         pass
-
-    # def __getattribute__(self, key):
-    #     return super().get_field(key)
 
     def loads(self, s: str):
         self.data = s
@@ -181,10 +175,6 @@ class JsonDot(Dot):
         return blist
 
     def __load_data(self, data: Union[dict,list], dot: Union[Dot,list]):
-        # if isinstance(dot, list):
-        #     dot.append(Dot(self.file_path))
-        #     dot = dot[-1]
-
         for k, v in data.items():
             if isinstance(v, dict):
                 bdot = Dot(self.file_path)
@@ -195,25 +185,4 @@ class JsonDot(Dot):
             else:
                 dot.add_field(k, v)
         return dot
-            
-    # def process_list_for_load(self, list: list):
-    #     blist = []                             
-    #     for elem in list:
-    #         bdot = Dot(self.file_path)
-    #         if isinstance(elem, dict):
-    #             blist.append(self.__load_data(elem, bdot))
-    #         elif isinstance(elem, list):
-    #             blist.append(self.__load_data(elem, bdot))
-    #     return blist
 
-    # def __load_data(self, data: dict, dot: Union[Dot, list]):        
-    #     for k, v in data.items():
-    #         if isinstance(v, dict):
-    #             bdot = Dot(self.file_path)
-    #             dot.add_field(k, self.__load_data(v, bdot))
-    #         elif isinstance(v, list):
-    #             blist = self.process_list_for_load(v)
-    #             dot.add_field(k, blist)       
-    #         else:
-    #             dot.add_field(k, v)
-    #     return dot
