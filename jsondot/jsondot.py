@@ -19,27 +19,31 @@ class Dot(object):
         for elem in l:            
             if isinstance(elem, Dot):
                 e = elem
-                d = elem.dumps()               
+                d = elem.__dumps()               
             if isinstance(elem, list):
                 e = elem
                 d = self.process_list_for_bumps(e)
             blist.append(d)
         return blist
-
+    
     def dumps(self):
+        data = self.__dumps()
+        return self.format_json(data)
+
+    def __dumps(self):
         items = self.__dict__.items()
         s = ""
         d1 = {}
         for k, v in items:
             if isinstance(v, Dot):
                 # v = v.translate(v.__dict__.items(), v.translation)
-                v = v.dumps()
+                v = v.__dumps()
                 d1[k] = v
             elif isinstance(v, list):
                 blist = list()
                 for i, elem in enumerate(v):
                     if isinstance(elem, Dot):
-                        d = elem.dumps()
+                        d = elem.__dumps()
                         blist.append(d)
                     if isinstance(elem, list):
                         clist = self.process_list_for_bumps(elem)
@@ -54,7 +58,7 @@ class Dot(object):
         pass
 
     def dump(self, path):
-        data = self.dumps()
+        data = self.__dumps()
         data = self.format_json(data)
         with open(path, 'w') as file:
             file.write(data)
@@ -141,7 +145,7 @@ class JsonDot(Dot):
         self.dot = dot
         return self.dot
 
-    def dumps(self):
+    def __dumps(self):
         formated_json = self.format_json(self.data)
         return formated_json
 
@@ -158,7 +162,7 @@ class JsonDot(Dot):
 
     def dump(self, file_path):
         with open(file_path, "w") as file:
-            file.write(self.dumps())
+            file.write(self.__dumps())
             
     def process_list_for_load(self, l: list):
         blist = []
