@@ -41,13 +41,12 @@ class TestDot(unittest.TestCase):
         dot1.dump(file_path)
         
         # Read data from file using JsonDot
-        json_dot = JsonDot()
-        json_dot.load(file_path)
+        json_dot = JsonDot().load(file_path)
         
         # Check if the loaded data is correct
         expected_output = {"name": "John"}
         
-        self.assertEqual(json_dot.dot.__dict__, expected_output)
+        self.assertEqual(json_dot.dumps, expected_output)
 
 
 if __name__ == '__main__':

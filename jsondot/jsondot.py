@@ -12,6 +12,9 @@ class Dot(object):
     def __str__(self) -> str:
         return self.__dict__.__str__()
     
+    def __dict__(self) -> dict:
+        self.__dict__ = self.dumps()
+    
     def process_list_for_bumps(self, l: list):
         blist = []
         e = None

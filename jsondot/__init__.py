@@ -5,5 +5,6 @@ A Python library that allows using json with dot notation. Similar to the json P
 """
 
 __version__ = "0.1.0"
-__author__ = 'Marco Antoni Calviño Coira'
+__author__ = 'Marco Antonio Calviño Coira'
 __credits__ = '2023 MitsSoft'
+
