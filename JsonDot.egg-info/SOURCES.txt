@@ -1,0 +1,9 @@
+LICENSE
+README.md
+setup.py
+JsonDot.egg-info/PKG-INFO
+JsonDot.egg-info/SOURCES.txt
+JsonDot.egg-info/dependency_links.txt
+JsonDot.egg-info/top_level.txt
+jsondot/__init__.py
+jsondot/jsondot.py
