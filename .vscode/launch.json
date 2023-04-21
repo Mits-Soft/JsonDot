@@ -5,10 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Python: Module",
             "type": "python",
             "request": "launch",
-            "program": "example_one.py",
+            "module": "jsondot.jsondot",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Example One",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: JsonDot Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "tests/jsondot_tests.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }

@@ -1,1 +1,3 @@
-wheel_creation/
+.env/
+.vscode/
+.ipynb_checkpoints/
