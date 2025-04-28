@@ -1,5 +1,5 @@
 import json
-from typing import Optional, Union
+from typing import Optional, Union, Any
 
 
 class Dot(object):
@@ -12,8 +12,30 @@ class Dot(object):
     def __str__(self) -> str:
         return self.__dict__.__str__()
     
-    def __dict__(self) -> dict:
-        self.__dict__ = self.dumps()
+    def __setattr__(self, name: str, value: Any) -> None:
+        super().__setattr__(name, value)
+        # if isinstance(value, list):
+
+        # else:
+        #     super().__setattr__(name, value)
+        # pass
+    
+    def process_list(self, l: list):
+        blist = []
+        e = None
+        d = None
+        for elem in l:            
+            if isinstance(elem, dict):
+                e = elem
+                bdot = Dot(self.file_path)
+                d = self.__load_data(e)
+                
+            elif isinstance(elem, list):
+                e = elem
+                d = self.process_list(e)
+            blist.append(d)
+        return blist
+    
     
     def process_list_for_bumps(self, l: list):
         blist = []
@@ -35,7 +57,7 @@ class Dot(object):
 
     def __dumps(self):
         items = self.__dict__.items()
-        s = ""
+        s = ''
         d1 = {}
         for k, v in items:
             if isinstance(v, Dot):
@@ -65,7 +87,7 @@ class Dot(object):
             file.write(data)
         
     def format_json(self, s: str):
-        output = ""
+        output = ''
         for char in s:
             if char == "'":
                 output += '"'
@@ -74,6 +96,9 @@ class Dot(object):
             else:
                 output += char
         return output
+    
+    def __load_data(self, data: Union[dict,list]):
+        return JsonDot().load_data(data, Dot())
         
     def load(self, path):
         return JsonDot().load(path)
@@ -98,9 +123,18 @@ class Dot(object):
                 d1[key] = v
         return d1
 
-    def add_field(self, name, value):
+    def load_field(self, name, value):
         name = self.format_param(name)
         setattr(self, name, value)
+        return self
+
+    def add_field(self, name, value):
+        name = self.format_param(name)
+        if isinstance(value, list):
+            blist = self.process_list(value)
+            setattr(self, name, blist)
+        else: 
+            setattr(self, name, value)
         return self
 
     def get_field(self, key):
@@ -118,7 +152,7 @@ class Dot(object):
         return new_param
 
 
-class JsonDot(Dot):
+class JsonDot():
 
     def __init__(self) -> None:
         self.file_path = ""
@@ -141,13 +175,16 @@ class JsonDot(Dot):
         dot = self.__load_data(self.data, dot)
         self.dot = dot
         return self.dot
+    
+    def dumps(self):
+        return self.__dumps()
 
     def __dumps(self):
         formated_json = self.format_json(self.data)
         return formated_json
 
     def format_json(self, s: str):
-        output = ""
+        output = ''
         for char in s:
             if char == "'":
                 output += '"'
@@ -176,16 +213,19 @@ class JsonDot(Dot):
                 d = self.process_list_for_load(e)
             blist.append(d)
         return blist
+    
+    def load_data(self, data: Union[dict,list], dot: Union[Dot,list]):
+        return self.__load_data(data, dot)
 
     def __load_data(self, data: Union[dict,list], dot: Union[Dot,list]):
         for k, v in data.items():
             if isinstance(v, dict):
                 bdot = Dot(self.file_path)
-                dot.add_field(k, self.__load_data(v, bdot))
+                dot.load_field(k, self.__load_data(v, bdot))
             elif isinstance(v, list):
                 blist = self.process_list_for_load(v)
-                dot.add_field(k, blist)
+                dot.load_field(k, blist)
             else:
-                dot.add_field(k, v)
+                dot.load_field(k, v)
         return dot
 
