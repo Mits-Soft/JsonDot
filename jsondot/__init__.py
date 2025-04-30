@@ -1,3 +1,5 @@
+from .jsondot import Dot, JsonDot
+
 """
 JsonDot.
 

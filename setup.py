@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='JsonDot',
-    version='0.1',
+    version='0.2',
     description='Load JSON files and use the data with dot notation then dump to the file',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',

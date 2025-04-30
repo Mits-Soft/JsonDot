@@ -29,16 +29,16 @@ class JsonDotExample():
                 "Nombre": "F1"
             }
         ] )
-        # self.json.list_two = [
-        #     {
-        #         "Tipo": "música",
-        #         "Nombre": "rock"
-        #     },
-        #     {
-        #         "Tipo": "deporte",
-        #         "Nombre": "F1"
-        #     }
-        # ]
+        self.json.list_three = [
+            {
+                "Tipo": "música",
+                "Nombre": "rock"
+            },
+            {
+                "Tipo": "deporte",
+                "Nombre": "F1"
+            }
+        ]
 
         print("Nombre: " + self.json.nombre)
         print("Apellido: " + self.json.apellido)
