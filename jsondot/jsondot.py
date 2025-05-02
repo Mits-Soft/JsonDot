@@ -64,21 +64,26 @@ class Dot(object):
         self.translation[new_param] = param
         return new_param
     
+    @staticmethod
+    def process_list_static(l: list, file_path: Optional[str] = None):
+        return Dot._shared_process_list(l, file_path)
+    
     def process_list(self, l: list):
+        return self._shared_process_list(l, self.file_path)
+    
+    @staticmethod
+    def _shared_process_list(l: list, file_path: Optional[str]):
         blist = []
-        e = None
-        d = None
         for elem in l:            
             if isinstance(elem, dict):
-                e = elem
-                bdot = Dot(self.file_path)
-                d = self.__load_data(e)
-                
+                bdot = Dot(file_path)
+                d = JsonDot()._JsonDot__load_data(elem, bdot)
             elif isinstance(elem, list):
-                e = elem
-                d = self.process_list(e)
+                d = Dot._shared_process_list(elem, file_path)
+            else:
+                d = elem
             blist.append(d)
-        return blist   
+        return blist
     
     def process_list_for_dumps(self, l: list):
         blist = []
@@ -105,6 +110,8 @@ class Dot(object):
         for k, v in items:
             if isinstance(v, Dot):
                 v = v.__dumps()
+                if self.translation and k in self.translation:
+                    k = self.translation[k]
                 d1[k] = v
             elif isinstance(v, list):
                 blist = list()
@@ -115,15 +122,19 @@ class Dot(object):
                     if isinstance(elem, list):
                         clist = self.process_list_for_dumps(elem)
                         blist.append(clist)
+                if self.translation and k in self.translation:
+                    k = self.translation[k]
                 d1[k] = blist                       
             elif k != 'translation' and k != 'file_path':
-                k = self.translation[k]
+                if self.translation and k in self.translation:
+                    k = self.translation[k]
                 d1[k] = v
         s = d1.__str__()
         return s
         pass
 
     def dump(self, path):
+        self.file_path = path
         data = self.__dumps()
         data = self.format_json(data)
         with open(path, 'w') as file:
@@ -197,20 +208,7 @@ class JsonDot():
         return dot
             
     def process_list_for_load(self, l: list):
-        blist = []
-        e = None
-        d = None
-        for elem in l:            
-            if isinstance(elem, dict):
-                e = elem
-                bdot = Dot(self.file_path)
-                d = self.__load_data(e, bdot)
-                
-            elif isinstance(elem, list):
-                e = elem
-                d = self.process_list_for_load(e)
-            blist.append(d)
-        return blist
+        return Dot.process_list_static(l, self.file_path)
     
     def dumps(self):
         return self.__dumps()
