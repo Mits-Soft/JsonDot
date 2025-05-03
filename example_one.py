@@ -14,31 +14,31 @@ class JsonDotExample():
         print("Apellido: " + self.json.apellido)
         print("Edad: " + str(self.json.edad))
 
-        # print("Change name to Pinocho Geppetto")
-        # self.json.nombre = "Pinocho"
-        # self.json.apellido = "Geppetto"
-        # self.json.edad = 6
-        # self.json.gustos[1].nombre = "F1"
-        # self.json.add_field("list_two", [
-        #     {
-        #         "Tipo": "música",
-        #         "Nombre": "rock"
-        #     },
-        #     {
-        #         "Tipo": "deporte",
-        #         "Nombre": "F1"
-        #     }
-        # ] )
-        # self.json.list_three = [
-        #     {
-        #         "Tipo": "música",
-        #         "Nombre": "rock"
-        #     },
-        #     {
-        #         "Tipo": "deporte",
-        #         "Nombre": "F1"
-        #     }
-        # ]
+        print("Change name to Pinocho Geppetto")
+        self.json.nombre = "Pinocho"
+        self.json.apellido = "Geppetto"
+        self.json.edad = 6
+        self.json.gustos[1].nombre = "F1"
+        self.json.add_field("list_two", [
+            {
+                "Tipo": "música",
+                "Nombre": "rock"
+            },
+            {
+                "Tipo": "deporte",
+                "Nombre": "F1"
+            }
+        ] )
+        self.json.list_three = [
+            {
+                "Tipo": "música",
+                "Nombre": "rock"
+            },
+            {
+                "Tipo": "deporte",
+                "Nombre": "F1"
+            }
+        ]
         
         self.json.diccionario = {
             "Nombre": "Juan",
