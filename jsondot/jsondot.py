@@ -29,7 +29,7 @@ class Dot(object):
         return ao
     
     def loads(self, s: str):
-        return JsonDot().loads(str, self)
+        return JsonDot().loads(s)
         
     def load(self, path):
         return JsonDot().load(path)
@@ -78,7 +78,7 @@ class Dot(object):
         for elem in l:            
             if isinstance(elem, dict):
                 bdot = Dot(file_path)
-                d = JsonDot()._JsonDot__load_data(elem, bdot)
+                d = JsonDot().load_data(elem, bdot)
             elif isinstance(elem, list):
                 d = Dot._shared_process_list(elem, file_path)
             else:
@@ -94,9 +94,11 @@ class Dot(object):
             if isinstance(elem, Dot):
                 e = elem
                 d = elem.__dumps()               
-            if isinstance(elem, list):
+            elif isinstance(elem, list):
                 e = elem
                 d = self.process_list_for_dumps(e)
+            else:
+                d = elem
             blist.append(d)
         return blist
     
@@ -122,9 +124,11 @@ class Dot(object):
                     if isinstance(elem, Dot):
                         d = elem.__dumps()
                         blist.append(d)
-                    if isinstance(elem, list):
+                    elif isinstance(elem, list):
                         clist = self.process_list_for_dumps(elem)
                         blist.append(clist)
+                    else:
+                        blist.append(elem)
                 if self.translation and k in self.translation:
                     k = self.translation[k]
                 d1[k] = blist                       

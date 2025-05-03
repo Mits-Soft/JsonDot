@@ -8,6 +8,25 @@ class JsonDotExample():
 
         print("Loaded json")
         print(self.json.dumps())
+        
+        self.json.add_field("list_one", [
+            "Juan",
+            "Pablo",
+            "Pedro",
+            "Maria",
+            "Jose"
+        ])
+        
+        self.json.lista_nombres = [
+            "Ana",
+            "Luis",
+            "Carlos",
+            "Sofia",
+            "Elena"
+        ]
+        
+        s = self.json.dumps()
+        print("Dumped string: \n" + s)
 
         print("Value got from json using dot")
         print("Nombre: " + self.json.nombre)
