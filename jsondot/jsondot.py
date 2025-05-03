@@ -4,7 +4,8 @@ from typing import Optional, Union, Any
 class Dot(object):
     
     def __init__(self, file_path: Optional[str] = None) -> None:
-        self.translation = {}
+        # Initialize translation before any other attributes
+        super().__setattr__('translation', {})
         self.file_path = file_path
         pass
 
@@ -12,15 +13,15 @@ class Dot(object):
         return self.__dict__.__str__()
     
     def __setattr__(self, name: str, value: Any) -> None:
-        # if not (hasattr(value, "check") and getattr(value, "check") == "true"):
-        #     attr_obj = self.create_attr_obj(name, value)
-        #     attr_obj["check"] = "true"
-        #     super().__setattr__(attr_obj["name"], attr_obj["value"])
-        # else:
+        if self.translation and not name in self.translation:
+            name = self.format_param(name)
+        if isinstance(value, list):
+            value = self.process_list(value)
+        if isinstance(value, dict):
+            value = self.__load_data(value)
         super().__setattr__(name, value)
         
     def create_attr_obj(self, name: str, value: Any):
-        # name = self.format_param(name)
         if isinstance(value, list):
             ao = {"name": name, "value": self.process_list(value), "check": "true"}
         else:
@@ -34,7 +35,7 @@ class Dot(object):
         return JsonDot().load(path)
         
     def __load_data(self, data: Union[dict,list]):
-        return JsonDot().load_data(data, Dot())    
+        return JsonDot().load_data(data, Dot(self.file_path))    
     
     def load_field(self, name, value):
         name = self.format_param(name)
@@ -101,7 +102,8 @@ class Dot(object):
     
     def dumps(self):
         data = self.__dumps()
-        return self.format_json(data)
+        fdata = self.format_json(data)
+        return fdata
 
     def __dumps(self):
         items = self.__dict__.items()
@@ -109,10 +111,11 @@ class Dot(object):
         d1 = {}
         for k, v in items:
             if isinstance(v, Dot):
-                v = v.__dumps()
+                v1 = v.__dumps()
                 if self.translation and k in self.translation:
                     k = self.translation[k]
-                d1[k] = v
+                v2 = self.remove_slash(v1)
+                d1[k] = v2
             elif isinstance(v, list):
                 blist = list()
                 for i, elem in enumerate(v):
@@ -140,6 +143,19 @@ class Dot(object):
         with open(path, 'w') as file:
             file.write(data)
         
+    def remove_slash(self, s: str):
+        output = ''
+        for char in s:
+            if char == "\\":
+                output += ""
+            elif char == '"':
+                output += ""
+            else:
+                output += char
+        # if output.startswith('"') and output.endswith('"'):
+        #     output = output[1:-1]
+        return output
+        
     def format_json(self, s: str):
         output = ''
         for char in s:
@@ -149,6 +165,8 @@ class Dot(object):
                 output += " "
             else:
                 output += char
+        # if output.startswith('"') and output.endswith('"'):
+        #     output = output[1:-1]
         return output
 
     def items(self):

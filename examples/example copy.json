@@ -20,22 +20,22 @@
     "Lista": [
         [
             {
-                "nombre": "objeto11",
-                "situacion": "dentro de una lista 0 1"
+                "Nombre": "objeto11",
+                "Situación": "dentro de una lista 0 1"
             },
             {
-                "nombre": "objeto12",
-                "situacion": "dentro de una lista 0 2"
+                "Nombre": "objeto12",
+                "Situación": "dentro de una lista 0 2"
             }
         ],
         [
             {
-                "nombre": "objeto21",
-                "situacion": "dentro de una lista 1 1"
+                "Nombre": "objeto21",
+                "Situación": "dentro de una lista 1 1"
             },
             {
-                "nombre": "objeto22",
-                "situacion": "dentro de una lista 12"
+                "Nombre": "objeto22",
+                "Situación": "dentro de una lista 12"
             }
         ]
     ]
