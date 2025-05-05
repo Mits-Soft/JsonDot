@@ -20,13 +20,6 @@ class Dot(object):
         if isinstance(value, dict):
             value = self.__load_data(value)
         super().__setattr__(name, value)
-        
-    def create_attr_obj(self, name: str, value: Any):
-        if isinstance(value, list):
-            ao = {"name": name, "value": self.process_list(value), "check": "true"}
-        else:
-            ao = {"name": name, "value": value, "check": "true"}
-        return ao
     
     def loads(self, s: str):
         return JsonDot().loads(s)

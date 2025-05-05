@@ -1,1 +1,95 @@
-{"Nombre": "Pinocho", "Apellido": "Geppetto", "Edad": 6, "Dirección":  {"Calle": "Calle Falsa", "Número": 123, "Ciudad": "Ciudad Ficticia"} , "Gustos": [ {"Tipo": "música", "Nombre": "rock"} ,  {"Tipo": "deporte", "Nombre": "F1"} ], "Lista": [[ {"Nombre": "objeto11", "Situación": "dentro de una lista 0 1"} ,  {"Nombre": "objeto12", "Situación": "dentro de una lista 0 2"} ], [ {"Nombre": "objeto21", "Situación": "dentro de una lista 1 1"} ,  {"Nombre": "objeto22", "Situación": "dentro de una lista 12"} ]], "diccionario":  {"Nombre": "Juan", "Apellido": "Perez", "Edad": 30, "Gustos": [{"Nombre": "música", "Tipo": "rock"}, {"Nombre": "deporte", "Tipo": "fútbol"}]} , "list_two": [ {"Tipo": "música", "Nombre": "rock"} ,  {"Tipo": "deporte", "Nombre": "F1"} ], "list_three": [ {"Tipo": "música", "Nombre": "rock"} ,  {"Tipo": "deporte", "Nombre": "F1"} ], "list_one": ["Juan", "Pablo", "Pedro", "Maria", "Jose"], "lista_nombres": ["Ana", "Luis", "Carlos", "Sofia", "Elena"]}
+{
+    "Nombre": "Pinocho",
+    "Apellido": "Geppetto",
+    "Edad": 6,
+    "Dirección": {
+        "Calle": "Calle Falsa",
+        "Número": 123,
+        "Ciudad": "Ciudad Ficticia"
+    },
+    "Gustos": [
+        {
+            "Tipo": "música",
+            "Nombre": "rock"
+        },
+        {
+            "Tipo": "deporte",
+            "Nombre": "F1"
+        }
+    ],
+    "Lista": [
+        [
+            {
+                "Nombre": "objeto11",
+                "Situación": "dentro de una lista 0 1"
+            },
+            {
+                "Nombre": "objeto12",
+                "Situación": "dentro de una lista 0 2"
+            }
+        ],
+        [
+            {
+                "Nombre": "objeto21",
+                "Situación": "dentro de una lista 1 1"
+            },
+            {
+                "Nombre": "objeto22",
+                "Situación": "dentro de una lista 12"
+            }
+        ]
+    ],
+    "diccionario": {
+        "Nombre": "Juan",
+        "Apellido": "Perez",
+        "Edad": 30,
+        "Gustos": [
+            {
+                "Nombre": "música",
+                "Tipo": "rock"
+            },
+            {
+                "Nombre": "deporte",
+                "Tipo": "fútbol"
+            }
+        ]
+    },
+    "list_two": [
+        {
+            "Tipo": "música",
+            "Nombre": "rock"
+        },
+        {
+            "Tipo": "deporte",
+            "Nombre": "F1"
+        }
+    ],
+    "list_three": [
+        {
+            "Tipo": "música",
+            "Nombre": "rock"
+        },
+        {
+            "Tipo": "deporte",
+            "Nombre": "F1"
+        }
+    ],
+    "list_one": [
+        "Juan",
+        "Pablo",
+        "Pedro",
+        "Maria",
+        "Jose"
+    ],
+    "lista_nombres": [
+        "Ana",
+        "Luis",
+        "Carlos",
+        "Sofia",
+        "Elena"
+    ],
+    "lista_nueva": [
+        "{\"Equipo\": \"McLaren\", \"Pilotos\":  {\"Piloto_1\": \"Norris\", \"Piloto_2\": \"Piastri\"} }",
+        "{\"Equipo\": \"RedBull\", \"Pilotos\":  {\"Piloto_1\": \"Verstappen\", \"Piloto_2\": \"Tsunoda\"} }"
+    ]
+}
