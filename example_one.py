@@ -8,64 +8,80 @@ class JsonDotExample():
 
         print("Loaded json")
         print(self.json.dumps())
-        
-        self.json.add_field("list_one", [
-            "Juan",
-            "Pablo",
-            "Pedro",
-            "Maria",
-            "Jose"
-        ])
-        
-        self.json.lista_nombres = [
-            "Ana",
-            "Luis",
-            "Carlos",
-            "Sofia",
-            "Elena"
-        ]
-        
-        s = self.json.dumps()
-        print("Dumped string: \n" + s)
 
-        print("Value got from json using dot")
-        print("Nombre: " + self.json.nombre)
-        print("Apellido: " + self.json.apellido)
-        print("Edad: " + str(self.json.edad))
+        # self.json.add_field("list_one", [
+        #     "Juan",
+        #     "Pablo",
+        #     "Pedro",
+        #     "Maria",
+        #     "Jose"
+        # ])
 
-        print("Change name to Pinocho Geppetto")
-        self.json.nombre = "Pinocho"
-        self.json.apellido = "Geppetto"
-        self.json.edad = 6
-        self.json.gustos[1].nombre = "F1"
-        self.json.add_field("list_two", [
+        # self.json.lista_nombres = [
+        #     "Ana",
+        #     "Luis",
+        #     "Carlos",
+        #     "Sofia",
+        #     "Elena"
+        # ]
+        self.json.lista_nueva = [
             {
-                "Tipo": "música",
-                "Nombre": "rock"
+                "Equipo": "McLaren",
+                "Pilotos": [
+                    {"Nombre": "Lando", "Apellido": "Norris"},
+                    {"Nombre": "Oscar", "Apellido": "Piastri"}
+                ]
             },
             {
-                "Tipo": "deporte",
-                "Nombre": "F1"
-            }
-        ] )
-        self.json.list_three = [
-            {
-                "Tipo": "música",
-                "Nombre": "rock"
-            },
-            {
-                "Tipo": "deporte",
-                "Nombre": "F1"
+                "Equipo": "Red Bull",
+                "Pilotos": [
+                    {"Nombre": "Max", "Apellido": "Verstappen"},
+                    {"Nombre": "Sergio", "Apellido": "Pérez"}
+                ]
             }
         ]
-        
+
+        # s = self.json.dumps()
+        # print("Dumped string: \n" + s)
+
+        # print("Value got from json using dot")
+        # print("Nombre: " + self.json.nombre)
+        # print("Apellido: " + self.json.apellido)
+        # print("Edad: " + str(self.json.edad))
+
+        # print("Change name to Pinocho Geppetto")
+        # self.json.nombre = "Pinocho"
+        # self.json.apellido = "Geppetto"
+        # self.json.edad = 6
+        # self.json.gustos[1].nombre = "F1"
+        # self.json.add_field("list_two", [
+        #     {
+        #         "Tipo": "música",
+        #         "Nombre": "rock"
+        #     },
+        #     {
+        #         "Tipo": "deporte",
+        #         "Nombre": "F1"
+        #     }
+        # ])
+        # self.json.list_three = [
+        #     {
+        #         "Tipo": "música",
+        #         "Nombre": "rock"
+        #     },
+        #     {
+        #         "Tipo": "deporte",
+        #         "Nombre": "F1"
+        #     }
+        # ]
+
         self.json.diccionario = {
             "Nombre": "Juan",
             "Apellido": "Perez",
             "Edad": 30,
             "Gustos": [
-            {"Nombre": "música", "Tipo": "rock"},
-            {"Nombre": "deporte", "Tipo": "fútbol"}
+                {"Nombre": "música", "Tipo": "rock"},
+                {"Nombre": "deporte", "Tipo": "fútbol"}
             ]
         }
 
@@ -79,7 +95,7 @@ class JsonDotExample():
         s = self.json.dumps()
         print("Dumped string: \n" + s)
 
-        self.json.dump('.\\examples\\example.json')
+        # self.json.dump('.\\examples\\example.json')
 
         pass
 
