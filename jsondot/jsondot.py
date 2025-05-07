@@ -19,12 +19,21 @@ class Dot(object):
         elif isinstance(value, dict):
             value = self.__load_data(value)
         super().__setattr__(name, value)
+        
+    def set_file_path(self, path: str):
+        self.file_path = path
     
     def loads(self, s: str):
         return JsonDot.loads(s, self.file_path)
         
     def load(self, path):
-        return JsonDot.load(path)
+        return self._load(path)
+    
+    def _load(self, path):
+        d = JsonDot.load(path, self)
+        if isinstance(d, Dot):
+            self.file_path = path
+        return d
         
     def __load_data(self, data: Union[dict,list]):
         return JsonDot.load_data(data, Dot(self.file_path)) 
@@ -62,10 +71,18 @@ class Dot(object):
         else: 
             setattr(self, name, value)
         return self
-
-    # TODO - Completely wrong - Fix this method
-    def get_field(self, key):
-        return self[key]
+    
+    def change_field_name(self, name, new_name):
+        name = self.format_param(name)
+        fnew_name = self.format_param(new_name)
+        if hasattr(self, name):
+            value = getattr(self, name)
+            delattr(self, name)
+            setattr(self, new_name, value)
+            if self.translation and name in self.translation:
+                del self.translation[name]
+                self.translation[fnew_name] = new_name
+        return self
     
     def dumps(self):
         data = self._dumps()
@@ -99,7 +116,12 @@ class Dot(object):
                         blist.append(elem)
                 if self.translation and k in self.translation:
                     k = self.translation[k]
-                d1[k] = blist                       
+                d1[k] = blist
+            elif isinstance(v, bool):
+                v1 = str(v).lower()
+                if self.translation and k in self.translation:
+                    k = self.translation[k]
+                d1[k] = v1                       
             elif k != 'translation' and k != 'file_path':
                 if self.translation and k in self.translation:
                     k = self.translation[k]
@@ -107,7 +129,9 @@ class Dot(object):
         s = d1.__str__()
         return s
 
-    def dump(self, path):
+    def dump(self, path: Optional[str] = None):
+        if self.file_path is not None and path is None:
+            path = self.file_path            
         self.file_path = path
         data = self._dumps()
         data = self.format_json(data)
@@ -147,18 +171,21 @@ class JsonDot():
         return dot
     
     @classmethod
-    def load(cls, path: str) -> Dot:
-        return cls.__load(path)
+    def load(cls, path: str, dot:Optional[Dot] = None) -> Dot:
+        return cls._load(path, dot)
     
     @classmethod
     def create_dot_from_file(cls, path: str) -> Dot:
         return cls.load(path)
     
     @classmethod
-    def __load(cls, path: str) -> Dot:
+    def _load(cls, path: str, dot: Optional[Dot] = None) -> Dot:
         with open(path, 'r') as f:
             data = json.load(f)
-        dot = Dot(path)
+        if dot is not None and isinstance(dot, Dot):
+            dot = dot
+        else:
+            dot = Dot(path)
         dot = cls.__load_data(data, dot, path)       
         return dot
     
@@ -175,6 +202,13 @@ class JsonDot():
             elif isinstance(v, list):
                 blist = cls.process_list_for_load(v, path)
                 dot.load_field(k, blist)
+            elif isinstance(v, str):
+                if v.strip().lower() == 'true':
+                    dot.load_field(k, True)
+                elif v.strip().lower() == 'false':
+                    dot.load_field(k, False)
+                else:
+                    dot.load_field(k, v)
             else:
                 dot.load_field(k, v)
         return dot
