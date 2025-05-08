@@ -6,17 +6,9 @@
     "configurations": [
         {
             "name": "Python: Example One",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
-            "program": "example_one.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "Python: JsonDot Tests",
-            "type": "python",
-            "request": "launch",
-            "program": "tests/jsondot_tests.py",
+            "program": "examples/example_one.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }

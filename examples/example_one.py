@@ -6,14 +6,14 @@ class JsonDotExample():
     def __init__(self) -> None:
         self.d1 = Dot()
         
-        self.d1 = self.d1.load(".\\examples\\d1.json")
+        self.d1 = self.d1.load(".\\examples\\examples\\d1.json")
         
         self.s1 = self.d1.dumps()
         
         self.d1.dump()
         
         print("Dumped string: \n" + self.s1)
-        self.json = JsonDot.load('.\\examples\\example.json')
+        self.json = JsonDot.load('.\\examples\\examples\\example.json')
 
         print("Loaded json")
         print(self.json.dumps())
