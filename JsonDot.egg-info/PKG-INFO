@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: JsonDot
-Version: 0.8.0
+Version: 0.9.0
 Summary: Load JSON files and use the data with dot notation then dump to the file
 Home-page: https://github.com/Mits-Soft/JsonDot.git
 Author: Marco Antonio Calviño Coira
